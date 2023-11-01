@@ -24,6 +24,7 @@ const Home = () => {
               ))}
             </ul>
           )}
+          {isError && <p>Error</p>}
         </div>
       </div>
     </div>
