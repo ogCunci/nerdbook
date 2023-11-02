@@ -35,7 +35,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
     useCreatePost();
   const { mutateAsync: updatePost, isPending: isUpdatingPost } =
     useUpdatePost();
-  const { mutateAsync: deletePost, isPending: isDeletingPost } =
+  const { isPending: isDeletingPost } =
     useDeletePost();
   const { user } = useUserContext();
   const navigate = useNavigate();
