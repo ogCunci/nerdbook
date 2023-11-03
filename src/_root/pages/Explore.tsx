@@ -65,7 +65,7 @@ const Explore = () => {
             src="/assets/icons/search.svg"
             width={24}
             height={24}
-            alt="searcg"
+            alt="search"
           />
           <Input
             type="text"

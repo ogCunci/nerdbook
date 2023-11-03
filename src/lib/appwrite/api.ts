@@ -78,13 +78,12 @@ export async function getCurrentUser() {
 
     if (!currentAccount) throw Error;
 
-    console.log(currentAccount.$id);
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.usersCollectionId,
       [Query.equal("accountId", currentAccount.$id)]
     );
-    console.log(currentUser);
+
     if (!currentUser) throw Error;
 
     return currentUser.documents[0];
@@ -347,6 +346,28 @@ export async function searchPosts(searchTerm: string) {
       appwriteConfig.databaseId,
       appwriteConfig.postsCollectionId,
       [Query.search("caption", searchTerm)]
+    );
+
+    if (!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getAllUsers({ pageParam }: { pageParam: number }) {
+  const queries: any[] = [Query.orderAsc("$createdAt"), Query.limit(10)];
+
+  if (pageParam) {
+    queries.push(Query.cursorAfter(pageParam.toString()));
+  }
+
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.usersCollectionId,
+      queries
     );
 
     if (!posts) throw Error;
